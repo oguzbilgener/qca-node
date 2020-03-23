@@ -1,0 +1,57 @@
+get:
+  summary: |
+    Retrieve a list of messages, sorted in the descending order for the creation
+    date. In order to load the next page, provide the `afterId` query string parameter.
+  operationId: getMessages
+  x-exegesis-controller: messages
+  parameters:
+    - $ref: "../../parameters/limit.yaml"
+    - $ref: "../../parameters/afterId.yaml"
+  responses:
+    "200":
+      description: Returns the list of messages
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../../schemas/Pagination.yaml"
+              - properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: "../../schemas/Message.yaml"
+
+    default:
+      $ref: "../../responses/serverError.yaml"
+post:
+  summary: Create a new message with a nonempty content.
+  operationId: createMessage
+  x-exegesis-controller: messages
+  requestBody:
+    description: The message create request
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../../schemas/MessageCreate.yaml"
+  responses:
+    "200":
+      description: Message was created.
+      content:
+        application/json:
+          schema:
+            $ref: "../../schemas/Message.yaml"
+    "400":
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - message
+            properties:
+              message:
+                type: string
+                example: Cannot create a message with an empty content.
+    default:
+      $ref: "../../responses/serverError.yaml"

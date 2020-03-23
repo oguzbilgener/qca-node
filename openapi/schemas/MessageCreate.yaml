@@ -1,0 +1,11 @@
+type: object
+description: A message creation or update request sent by the client.
+required:
+  - content
+properties:
+  content:
+    type: string
+    example: Hello world!
+    description: |
+      The text content of the new message, or the new text content of the message
+      to be updated.

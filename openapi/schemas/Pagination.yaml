@@ -1,0 +1,16 @@
+type: object
+required:
+  - lastId
+  - hasMore
+properties:
+  lastId:
+    description: |
+      The ID of the last object returned in this batch of objects. It's used
+      as the cursor for this API and it can be provided to the `afterId`
+    type: string
+    format: ObjectId
+    example: 5e6e5461a712d52c732f7162
+  hasMore:
+    description: Whether there is more items after the item with the `lastId`.
+    type: boolean
+    example: true

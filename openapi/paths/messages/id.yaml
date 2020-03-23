@@ -1,0 +1,51 @@
+parameters:
+  - $ref: "../../parameters/id.yaml"
+get:
+  summary: Retrieve a message by ID.
+  operationId: getMessage
+  x-exegesis-controller: messages
+  responses:
+    "200":
+      description: Returns the requested message.
+      content:
+        application/json:
+          schema:
+            $ref: "../../schemas/Message.yaml"
+    "404":
+      $ref: "../../responses/notFoundError.yaml"
+    default:
+      $ref: "../../responses/serverError.yaml"
+
+put:
+  summary: Update a message content.
+  operationId: updateMessage
+  x-exegesis-controller: messages
+  requestBody:
+    description: The message content to update
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../../schemas/MessageCreate.yaml"
+  responses:
+    "200":
+      description: Message was updated.
+      content:
+        application/json:
+          schema:
+            $ref: "../../schemas/Message.yaml"
+    "404":
+      $ref: "../../responses/notFoundError.yaml"
+    default:
+      $ref: "../../responses/serverError.yaml"
+delete:
+  summary: Delete a message.
+  operationId: deleteMessage
+  x-exegesis-controller: messages
+  responses:
+    "204":
+      description: Message was deleted.
+    "404":
+      $ref: "../../responses/notFoundError.yaml"
+    default:
+      $ref: "../../responses/serverError.yaml"

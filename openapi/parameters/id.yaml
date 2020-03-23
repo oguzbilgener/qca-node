@@ -1,0 +1,8 @@
+name: 'id'
+in: 'path'
+description: The ID of the object to retrieve or update.
+required: true
+schema:
+  type: string
+  format: ObjectId
+  example: 5e6d8f45be47ac3a186940d6

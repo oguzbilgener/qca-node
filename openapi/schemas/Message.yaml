@@ -1,0 +1,40 @@
+type: object
+description: |
+  A message record hosted by the server with a text content and some metadata
+  such as creation date, last update date.
+required:
+  - id
+  - content
+  - createdAt
+  - palindrome
+properties:
+  id:
+    type: string
+    format: ObjectId
+    example: 5e6d938fbe47ac3a186940d9
+    readOnly: true
+    description: The unique ID for this message in the MongoDB ObjectId format.
+  content:
+    type: string
+    example: Hello world!
+    description: The text content of the message.
+  createdAt:
+    type: string
+    format: date-time
+    example: "2020-03-14T21:00:00Z"
+    readOnly: true
+    description: The date and time at which the message was created.
+  updatedAt:
+    type: string
+    format: date-time
+    example: "2020-03-15T14:42:00Z"
+    description: |
+      The date and time at which the message was last updated. Only messages
+      that were ever edited have this field.
+  palindrome:
+    type: boolean
+    example: false
+    description: |
+      Whether the content field value is a palindrome or not. A palindrome is a
+      word, number, phrase, or other sequence of characters which reads the same
+      backward as forward, such as madam, racecar.

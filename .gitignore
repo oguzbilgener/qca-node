@@ -1,0 +1,8 @@
+.env
+build/
+coverage/
+cli/build/
+node_modules
+*.workspace
+*.code-workspace
+.DS_Store

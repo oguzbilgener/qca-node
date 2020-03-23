@@ -1,0 +1,20 @@
+version: 3"
+services:
+  mongo:
+    image: mongo:4.2
+    container_name: "qca-mongo"
+    ports:
+      - "127.0.0.1:27017:27017"
+    env_file:
+      - ./.env
+    restart: always
+  qca-node:
+    image: oguzbilgener/qca-node:1.0.0
+    container_name: "qca-node"
+    env_file:
+      - ./.env
+    depends_on:
+      - mongo
+    ports:
+      - 8080:8080
+    restart: always

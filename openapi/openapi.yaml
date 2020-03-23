@@ -1,0 +1,33 @@
+openapi: 3.0.3
+info:
+  title: qca-node Messages API v1
+  description: |
+    A Simple API for creating, updating, retrieving and deleting messages.
+    Visit [https://github.com/oguzbilgener/qca-node](https://github.com/oguzbilgener/qca-node) for the source code.
+  version: 1.0.0
+servers:
+  - url: "/v1"
+paths:
+  /messages:
+    $ref: "./paths/messages/index.yaml"
+  /messages/{id}:
+    $ref: "./paths/messages/id.yaml"
+
+components:
+  responses:
+    unspecifiedError:
+      $ref: "./responses/serverError.yaml"
+    notFoundError:
+      $ref: "./responses/notFoundError.yaml"
+
+  parameters:
+    id:
+      $ref: "./parameters/id.yaml"
+    afterId:
+      $ref: "./parameters/afterId.yaml"
+    max:
+      $ref: "./parameters/limit.yaml"
+
+  schemas:
+    Message:
+      $ref: "./schemas/Message.yaml"

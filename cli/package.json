@@ -1,0 +1,37 @@
+{
+  "name": "qca-cli",
+  "version": "1.0.0",
+  "description": "A CLI for the qca REST API v1",
+  "main": "build/index.js",
+  "scripts": {
+    "build": "sh ./build-cli.sh",
+    "devrun": "node -r ts-node/register index.ts"
+  },
+  "author": "Oguz Bilgener (oguz@bilgener.me)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oguzbilgener/qca-node.git"
+  },
+  "dependencies": {
+    "chalk": "^3.0.0",
+    "clear": "^0.1.0",
+    "luxon": "^1.22.0",
+    "node-fetch": "^2.6.0",
+    "qs": "^6.9.1",
+    "yargs": "^15.3.1"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^11.0.2",
+    "@rollup/plugin-node-resolve": "^7.1.1",
+    "@types/luxon": "^1.21.0",
+    "@types/node": "^13.9.2",
+    "@types/node-fetch": "^2.5.5",
+    "@types/qs": "^6.9.1",
+    "rollup": "^2.1.0",
+    "rollup-plugin-typescript2": "^0.26.0",
+    "ts-node": "^8.7.0",
+    "tslib": "^1.11.1",
+    "typescript": "^3.8.3"
+  }
+}

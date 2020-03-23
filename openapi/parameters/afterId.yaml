@@ -1,0 +1,9 @@
+name: afterId
+in: query
+description: |
+  Skip all the objects before and including the object with this ID when retrieving
+  objects.
+schema:
+  type: string
+  format: ObjectId
+  example: 5e6d9080be47ac3a186940d8
