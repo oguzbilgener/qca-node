@@ -4,7 +4,7 @@
 
 This is a web service that provides a simple HTTP REST API to create, retrieve, update and delete messages. The API is defined as an OpenAPI 3.0 (a.k.a. Swagger) specification.
 
-A live demo and the interactive API documentation is available at [https://qca-node.bilgener.ca](https://qca-node.bilgener.ca).
+A live demo and the interactive API documentation is available at [https://qca-node.bilgener.ca](https://qca-node.bilgener.ca). The endpoint for the Message resources is `/v1/messages`.
 
 ### Architecture and Implementation Details
 
@@ -71,6 +71,110 @@ There are two kinds of tests:
 For simplicity, all test suites are run by Jest at once, and Jest launches an in-memory MongoDB server for the API integration tests.
 
 GitHub Actions runs the test suite on every commit, however it doesn't create container images or do automated deployment.
+
+### API Documentation
+
+The API documentation is served live on the API server on the [home page](https://qca-node.bilgener.ca), but below is a summary as well:
+
+<details><summary>Click here to expand the API Documentation</summary>
+
+#### `GET /v1/messages`
+
+Retrieve a list of messages, sorted in the descending order for the creation
+date. In order to load the next page, provide the `afterId` query string parameter.
+Returns a list of messages, paginated. You can load up to 1000 messages at once with the `limit` query string parameter.
+
+Sample Response body with 1 item:
+
+```json
+{
+  "lastId": "5e6e5461a712d52c732f7162",
+  "hasMore": false,
+  "items": [
+    {
+      "id": "5e6d938fbe47ac3a186940d9",
+      "content": "Hello world!",
+      "createdAt": "2020-03-14T21:00:00Z",
+      "updatedAt": "2020-03-15T14:42:00Z",
+      "palindrome": false
+    }
+  ]
+}
+```
+
+In order to load the next page, make a request like `GET /v1/messages?afterId=5e6e5461a712d52c732f7162`.
+
+#### `GET /v1/messages/{id}`
+
+Retrieve a message by ID.
+
+Sample Response body:
+
+```json
+{
+  "id": "5e6d938fbe47ac3a186940d9",
+  "content": "Hello world!",
+  "createdAt": "2020-03-14T21:00:00Z",
+  "updatedAt": "2020-03-15T14:42:00Z",
+  "palindrome": false
+}
+```
+
+#### `POST /v1/messages`
+
+Create a new message with a nonempty content.
+
+Request body:
+
+```json
+{
+  "content": "Hello world!"
+}
+```
+
+Response body:
+
+```json
+{
+  "id": "5e6d938fbe47ac3a186940d9",
+  "content": "Hello world!",
+  "createdAt": "2020-03-14T21:00:00Z",
+  "updatedAt": "2020-03-15T14:42:00Z",
+  "palindrome": false
+}
+```
+
+#### `PUT /v1/messages/{id}`
+
+Update a message content.
+
+Request body:
+
+```json
+{
+  "content": "Hello world! 2"
+}
+```
+
+Response:
+
+```json
+{
+  "id": "5e6d938fbe47ac3a186940d9",
+  "content": "Hello world! 2",
+  "createdAt": "2020-03-14T21:00:00Z",
+  "updatedAt": "2020-03-15T14:42:00Z",
+  "palindrome": false
+}
+```
+
+#### `DELETE /v1/messages/{id}`
+
+Delete a message.
+
+Response is HTTP 204.
+
+</details>
 
 ### Running the App Locally
 
@@ -148,107 +252,6 @@ The prebuilt container image can be deployed to any cloud container service. The
 
 Warning: This project is currently not using any secret management tool and all configuration is provided via environment variables.
 
-### API Documentation
-
-The API documentation is served live on the API server on the [home page](https://qca-node.bilgener.ca), but below is a summary as well:
-
-<details><summary>Click here to expand the API Documentation</summary>
-
-#### `GET /v1/messages`
-
-Retrieve a list of messages, sorted in the descending order for the creation
-date. In order to load the next page, provide the `afterId` query string parameter.
-Returns a list of messages, paginated.
-
-Sample Response body with 1 item:
-
-```json
-{
-  "lastId": "5e6e5461a712d52c732f7162",
-  "hasMore": false,
-  "items": [
-    {
-      "id": "5e6d938fbe47ac3a186940d9",
-      "content": "Hello world!",
-      "createdAt": "2020-03-14T21:00:00Z",
-      "updatedAt": "2020-03-15T14:42:00Z",
-      "palindrome": false
-    }
-  ]
-}
-```
-
-#### `GET /v1/messages/{id}`
-
-Retrieve a message by ID.
-
-Sample Response body:
-
-```json
-{
-  "id": "5e6d938fbe47ac3a186940d9",
-  "content": "Hello world!",
-  "createdAt": "2020-03-14T21:00:00Z",
-  "updatedAt": "2020-03-15T14:42:00Z",
-  "palindrome": false
-}
-```
-
-#### `POST /v1/messages`
-
-Create a new message with a nonempty content.
-
-Request body:
-
-```json
-{
-  "content": "Hello world!"
-}
-```
-
-Response body:
-
-```json
-{
-  "id": "5e6d938fbe47ac3a186940d9",
-  "content": "Hello world!",
-  "createdAt": "2020-03-14T21:00:00Z",
-  "updatedAt": "2020-03-15T14:42:00Z",
-  "palindrome": false
-}
-```
-
-#### `PUT /v1/messages/{id}`
-
-Update a message content.
-
-Request body:
-
-```json
-{
-  "content": "Hello world! 2"
-}
-```
-
-Response:
-
-```json
-{
-  "id": "5e6d938fbe47ac3a186940d9",
-  "content": "Hello world! 2",
-  "createdAt": "2020-03-14T21:00:00Z",
-  "updatedAt": "2020-03-15T14:42:00Z",
-  "palindrome": false
-}
-```
-
-#### `DELETE /v1/messages/{id}`
-
-Delete a message.
-
-Response is HTTP 204.
-
-</details>
 
 ### Command Line Utility
 
