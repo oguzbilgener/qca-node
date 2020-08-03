@@ -11,6 +11,7 @@ RUN npm run build
 # install dev dependencies to save more than 100+ MB of space.
 
 FROM node:12.14.0-alpine
+RUN apk --no-cache add tini
 
 WORKDIR /qca-node
 COPY --from=base /qca-node/assets ./assets
@@ -23,4 +24,5 @@ RUN npm ci --only=production
 RUN rm -rf .npmrc ~/.npm ~/.cache
 
 EXPOSE 8080
+ENTRYPOINT ["/sbin/tini", "--"]
 CMD ["node", "build/index.js"]
