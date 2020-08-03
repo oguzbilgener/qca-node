@@ -1,0 +1,45 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: qcahttpsredirect
+  namespace: qca
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: true
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: qca-ingress
+  namespace: qca
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`qca-node.oguz.ca`)
+      kind: Rule
+      services:
+        - name: qca-node-np
+          port: 80
+  tls:
+    certResolver: letsencrypt
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: qca-ingress-redirect
+  namespace: qca
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`qca-node.oguz.ca`)
+      kind: Rule
+      middlewares:
+         - name: qcahttpsredirect
+           namespace: qca
+      services:
+        - name: qca-node-np
+          port: 80

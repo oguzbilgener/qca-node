@@ -1,0 +1,57 @@
+env:
+  - name: AWS_HOSTED_ZONE_ID
+    # hosted zone ID for oguz.ca
+    value: Z00742193LP9JKKH44Z4F
+  - name: AWS_REGION
+    value: us-east-1
+  - name: AWS_ACCESS_KEY_ID
+    valueFrom:
+      secretKeyRef:
+        name: dnschallenge-aws-access-key-id
+        key: AWS_ACCESS_KEY_ID
+  - name: AWS_SECRET_ACCESS_KEY
+    valueFrom:
+      secretKeyRef:
+        name: dnschallenge-aws-secret-access-key
+        key: AWS_SECRET_ACCESS_KEY
+additionalArguments:
+  - "--entrypoints.web.address=:8000"
+  - "--entrypoints.websecure.address=:8443"
+  - "--entrypoints.websecure.http.tls.certResolver=letsencrypt"
+  - "--certificatesresolvers.letsencrypt.acme.email=oguz@bilgener.net"
+  - "--certificatesresolvers.letsencrypt.acme.storage=/data/acme.json"
+  # - "--certificatesresolvers.letsencrypt.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
+  - "--certificatesresolvers.letsencrypt.acme.caserver=https://acme-v02.api.letsencrypt.org/directory"
+  - "--api.insecure=true"
+  - "--accesslog=true"
+  - "--log.level=INFO"
+  - "--certificatesResolvers.letsencrypt.acme.dnschallenge=true"
+  - "--certificatesResolvers.letsencrypt.acme.dnschallenge.provider=route53"
+# volumes:
+#   - name: certstorage
+#     mountPath: "/data/certs"
+#     type: nfs
+#     persistentVolumeClaim:
+#       claimName: traefik-pvc
+
+# persistence:
+#   enabled: true
+#   accessMode: ReadWriteOnce
+#   size: 128Mi
+#   # storageClass: ""
+#   path: /data
+#   annotations: {
+#     "pv.beta.kubernetes.io/gid": "65532"
+#   }
+
+securityContext:
+  capabilities:
+    drop: []
+    add:
+      - ALL
+  readOnlyRootFilesystem: false
+  runAsGroup: 0
+  runAsNonRoot: false
+  runAsUser: 0
+podSecurityContext:
+  fsGroup: 0
