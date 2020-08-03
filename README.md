@@ -1,6 +1,6 @@
 # qca-node
 
-![Node.js CI](https://github.com/oguzbilgener/qca-node/workflows/Node.js%20CI/badge.svg)
+![Node.js CI](https://github.com/oguzbilgener/qca-node/workflows/Node.js%20CI/badge.svg) [![codecov](https://codecov.io/gh/oguzbilgener/qca-node/branch/master/graph/badge.svg)](https://codecov.io/gh/oguzbilgener/qca-node)
 
 This is a web service that provides a simple HTTP REST API to create, retrieve, update and delete messages. The API is defined as an OpenAPI 3.0 (a.k.a. Swagger) specification.
 
