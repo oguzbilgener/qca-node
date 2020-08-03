@@ -48,10 +48,11 @@ export default class MessageService extends BaseService<
             };
         }
 
-        const cursor = this.db.Message.find(findQuery);
-        const total = await this.db.Message.collection.count(findQuery);
+        const total = await this.db.Message.collection.estimatedDocumentCount(findQuery);
         const hasMore = total > params.limit;
-        const messages = await cursor.sort({ _id: -1 }).limit(params.limit);
+        const messages = await this.db.Message.find(findQuery)
+            .sort({ _id: -1 })
+            .limit(params.limit);
         return {
             items: messages,
             lastId: findLastId(messages),

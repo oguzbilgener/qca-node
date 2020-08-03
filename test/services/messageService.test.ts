@@ -54,7 +54,7 @@ describe('MessageService', () => {
                 createdAt: new Date(),
             };
             class FakeQuery {
-                async count() {
+                async estimatedDocumentCount() {
                     return 51;
                 }
                 sort() {
@@ -72,7 +72,7 @@ describe('MessageService', () => {
             }
             const fakeDb = {
                 Message: {
-                    collection: { count: () => 51 },
+                    collection: { estimatedDocumentCount: () => 51 },
                     find: () => new FakeQuery(),
                 },
             };
@@ -100,7 +100,7 @@ describe('MessageService', () => {
                 createdAt: new Date(),
             };
             class FakeQuery {
-                async count() {
+                async estimatedDocumentCount() {
                     return 2;
                 }
                 sort() {
@@ -118,7 +118,7 @@ describe('MessageService', () => {
             }
             const fakeDb = {
                 Message: {
-                    collection: { count: () => 2 },
+                    collection: { estimatedDocumentCount: () => 2 },
                     find: () => new FakeQuery(),
                 },
             };

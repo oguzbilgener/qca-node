@@ -25,8 +25,8 @@ describe('index', () => {
     });
 
     describe('liveness probe', () => {
-        it('should return ok', () => {
-            request(app)
+        it('should return ok', async () => {
+            await request(app)
                 .get('/status')
                 .expect(200);
         });
