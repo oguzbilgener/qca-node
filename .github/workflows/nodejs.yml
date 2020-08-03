@@ -25,3 +25,9 @@ jobs:
     - run: npm test
       env:
         CI: true
+    - uses: codecov/codecov-action@v1
+      with:
+        directory: coverage
+        flags: unitTest
+        name: codecov-jest
+        fail_ci_if_error: false
