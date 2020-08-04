@@ -248,10 +248,7 @@ This should print the address of the service that is currently running, like `ht
 
 ### Deploying the App
 
-The prebuilt container image can be deployed to any cloud container service. The live demo runs on a simple, three-node cluster on Amazon Elastic Kubernetes Service. The web service is exposed via an ALB Ingress Controller (configuration can be found in deploy/qca-node-ingress.yaml) which sets up an Application Load Balancer. There is also an ExternalDNS service in the same cluster that creates DNS records in Route53 from the ALB Ingress configuration. Right now I'm hesitant to share the yaml files for configuring that and the EKS cluster as I don't believe I have perfected all the settings yet.
-
-Warning: This project is currently not using any secret management tool and all configuration is provided via environment variables.
-
+The prebuilt container image can be deployed to any cloud container service. The live demo runs on a simple, three-node cluster on Amazon Elastic Kubernetes Service. The web service is exposed via an ALB Ingress Controller (configuration can be found in deploy/qca-node-ingress.yaml) which sets up an Application Load Balancer. There is also an ExternalDNS service in the same cluster that creates DNS records in Route53 from the ALB Ingress configuration. 
 
 ### Command Line Utility
 
