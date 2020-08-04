@@ -1,6 +1,6 @@
 {
   "name": "qca-node",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A REST API to create, retrieve, update and delete messages.",
   "main": "build/index.js",
   "author": "Oguz Bilgener (oguz@bilgener.me)",
