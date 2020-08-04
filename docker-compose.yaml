@@ -9,7 +9,7 @@ services:
       - ./.env
     restart: always
   qca-node:
-    image: oguzbilgener/qca-node:1.0.0
+    image: oguzbilgener/qca-node:1.0.1
     container_name: "qca-node"
     env_file:
       - ./.env
